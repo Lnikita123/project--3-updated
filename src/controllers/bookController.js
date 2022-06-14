@@ -201,9 +201,9 @@ const getBookDetailsById = async (req, res) => {
 
 const updateDetails = async function (req, res) {
     try {
-      let userIdFromToken = req.userId;
-      let bookId = req.params.bookId;
-      let requestBody = req.body;
+      // let userIdFromToken = req.userId;
+      // let bookId = req.params.bookId;
+      // let requestBody = req.body;
       const { title, excerpt, releasedAt, ISBN } = requestBody;
   
       if (!Validator.isValidRequestBody(req.params)) {
@@ -212,9 +212,7 @@ const updateDetails = async function (req, res) {
   
       
       if (!Validator.isValidObjectId(bookId)) {
-        return res
-          .status(400)
-          .send({ status: false, message: `bookId is invalid.` });
+        return res.status(400).send({ status: false, message: `bookId is invalid.` });
       }
   
       if (!Validator.isValidString(title)) {

@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        enum: ["Mr", "Mrs", "Miss"]
+        enum: ["Mr", "Mrs", "Miss"] 
     },
     name: {
         type: String,
@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
     phone: {
         type: String,
         required: true,
-        unique: true
+        unique: true  
     },
     email: {
         type: String,

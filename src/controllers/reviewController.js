@@ -70,6 +70,11 @@ const updateReviews = async function (req, res) {
       if (!Validator.isValidRequestBody(req.params)) {
         return res.status(400).send({status: false, message: "Invalid request parameters. Please provide query details"});
       }
+
+
+      if (!reviewedBy) {
+        return res.status(400).send({status: false, message: "ReviewedBy is required"});
+      }
   
       
       if (!Validator.isValidObjectId(bookId)) {
