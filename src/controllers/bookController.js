@@ -82,9 +82,9 @@ const createBook = async function (req, res) {
         }
 
         if (subcategory) { 
-            if (Array.isArray(subcategory)) {
+            if (Array.isArray(subcategory)) {    // Array constructor 
                 const uniqueSubcategoryArr = [...new Set(subcategory)];
-                data["subcategory"] = uniqueSubcategoryArr; //Using array constructor here
+                data["subcategory"] = uniqueSubcategoryArr; // Using array constructor here
             }
         }
 
@@ -115,7 +115,7 @@ const getBooks = async function (req, res) {
 
         if (!Validator.isValidRequestBody(queryParams)) return res.status(400).send({ status: false, msg: "Please Provide Data in params" })
 
-        let filterQuery = { ...queryParams, isDeleted: false, deletedAt: null };
+        let filterQuery = { ...queryParams, isDeleted: false, deletedAt: null }; // data which is not deleted.
 
         const { userId, category, subcategory } = queryParams
 
@@ -183,12 +183,12 @@ const getBookDetailsById = async (req, res) => {
             });
         }
 
-       let {...data} = book._doc
+       let {...data} = book._doc  // _doc removing uneccessary data. 
 
        let reviewdata = await reviewModel.find({bookId: bookId}).select({isDeleted: 0, updatedAt: 0, createdAt: 0, __v: 0})
        console.log(reviewdata)
 
-       data.reviewsData = reviewdata 
+ 
 
         return res.status(200).send({ status: true, message: 'Books list', data: data})
     } catch (err) {
@@ -201,9 +201,9 @@ const getBookDetailsById = async (req, res) => {
 
 const updateDetails = async function (req, res) {
     try {
-      // let userIdFromToken = req.userId;
-      // let bookId = req.params.bookId;
-      // let requestBody = req.body;
+       let userIdFromToken = req.userId;
+       let bookId = req.params.bookId;
+       let requestBody = req.body;
       const { title, excerpt, releasedAt, ISBN } = requestBody;
   
       if (!Validator.isValidRequestBody(req.params)) {
@@ -268,7 +268,7 @@ const updateDetails = async function (req, res) {
         });
         return;
       }
-      if (
+      if (                               // if we want only one field update then we use or
         req.body.title ||
         req.body.exerpt ||
         req.body.releasedAt ||
