@@ -49,7 +49,7 @@ const createReviewByBookId = async function (req, res) {
         }
         let reviewdata = await reviewModel.create(createReviewdata)
 
-        await bookModel.findOneAndUpdate({ _id: bookId, isDeleted: false }, { $inc: { reviews: 1 } })
+        await bookModel.findOneAndUpdate({ _id: bookId, isDeleted: false }, { $inc: { reviews: 1 } })    // Increasing review by one when the book is is not deleted.
 
         let newdata = await reviewModel.find(reviewdata).select({ isDeleted: 0, updatedAt: 0, createdAt: 0, __v: 0 })
 
@@ -176,7 +176,7 @@ const updateReviews = async function (req, res) {
 
     const deletedReview = await reviewModel.findOneAndUpdate({ _id: req.params.reviewId}, { isDeleted: true }, { new: true });
 
-    await bookModel.findOneAndUpdate({ _id: bookId, isDeleted: false }, { $inc: { reviews: -1 } });    
+    await bookModel.findOneAndUpdate({ _id: bookId, isDeleted: false }, { $inc: { reviews: -1 } });  // decrement review.  
 
     res.status(200).send({status: true, msg:"Deleted Sucessfullly", data: deletedReview})
 
