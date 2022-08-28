@@ -135,7 +135,7 @@ const loginUser = async function (req, res) {
     status: false,msg: "email is not correct" });
     }
 
-    if (user.password != passwords) {
+    if (user.password != passwords) {        // checking password provided by user matches passwords in db.
         return res.status(400).send({status: false, msg: "password is not correct"})
     }
     
