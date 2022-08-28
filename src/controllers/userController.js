@@ -116,7 +116,7 @@ const loginUser = async function (req, res) {
     try {
     let body = req.body
     
-   if (!Validator.isValidRequestBody(data)) {
+   if (!Validator.isValidRequestBody(body)) {
           return res.status(400).send({status: false, msg: "please provide some data"})
       }
       
