@@ -115,11 +115,7 @@ const Validator= require("../validator/validation")
 const loginUser = async function (req, res) {
     try {
     let body = req.body
-    
-   if (!Validator.isValidRequestBody(body)) {
-          return res.status(400).send({status: false, msg: "please provide some data"})
-      }
-      
+    if (Object.keys(body) != 0) {
     let userName = req.body.email;
     let passwords = req.body.password; 
     if (!(/^\w+([\.-]?\w+)@\w+([\. -]?\w+)(\.\w{2,3})+$/.test(userName))) { return res.status(400).send({ status: false, msg: "Please provide a valid email" }) }
@@ -135,7 +131,7 @@ const loginUser = async function (req, res) {
     status: false,msg: "email is not correct" });
     }
 
-    if (user.password != passwords) {        // checking password provided by user matches passwords in db.
+    if (user.password != passwords) {
         return res.status(400).send({status: false, msg: "password is not correct"})
     }
     
@@ -160,7 +156,6 @@ const loginUser = async function (req, res) {
     }
     
     };
-    
     
 
 
